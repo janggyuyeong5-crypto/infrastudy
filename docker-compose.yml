@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web-server:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+    networks:
+      - frontend-net
+      - backend-net
+
+  db-server:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MY_DB_PASSWORD}
+    networks:
+      - backend-net
+
+networks:
+  frontend-net:
+  backend-net:
